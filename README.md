@@ -37,7 +37,9 @@ User.find().then(function(users) {
 ```
 
 ## Example
-Let's create two formatters for `User` model. All formatters must input an object to be formatter and return a [promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+Let's create two formatters for `User` model.
+
+All formatters must input an object to be formatter and return a [promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
 ```javascript
 // api/formatters/user/teaser.js
@@ -86,3 +88,10 @@ module.exports = {
   }
 };
 ```
+
+## Ideas
+
+[@sgress454](https://github.com/sgress454) [commented](https://github.com/balderdashy/sails/issues/4049#issuecomment-288526987):
+> You could definitely create a hook that would load formatters from api/formatters and publish your hook to NPM.
+>
+> Another idea of how to go about this sort of thing would be to create custom responses, so instead of using res.ok() you would do `res.outputSomeModel()`. You can [put custom responses in `api/responses`](http://sailsjs.com/documentation/concepts/custom-responses/adding-a-custom-response) and then call them from any controller.
