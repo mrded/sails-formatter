@@ -1,0 +1,20 @@
+{
+  "name": "sails-formatter",
+  "version": "0.0.1",
+  "description": "Helps to specify how objects are displayed.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrded/sails-formatter.git"
+  },
+  "keywords": [],
+  "author": "Dmitry Demenchuk @mrded (dmitry@demenchuk.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrded/sails-formatter/issues"
+  },
+  "homepage": "https://github.com/mrded/sails-formatter#readme",
+  "dependencies": {
+    "rootpath": "^0.1.2"
+  }
+}
