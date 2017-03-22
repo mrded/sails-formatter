@@ -1,19 +1,11 @@
 require('rootpath')();
 
-var one = function(object, model, type) { // object is (object || numeric)
-  if (typeof object === 'number') {
-    // If object is not loaded - load it.
-    return sails.models[model].findOne(object).then(function(object) {
-      return one(object, model, type);
-    });
-  }
+var one = function(object, model, type) {
+  var formatterPath = 'api/formatters/%model/%type'
+    .replace('%model', model)
+    .replace('%type', type);
 
-  else { // Expect typeof object === 'object'.
-    var formatterPath = 'api/formatters/%model/%type'
-      .replace('%model', model).replace('%type', type);
-
-    return require(formatterPath)(object);
-  }
+  return require(formatterPath)(object);
 };
 
 var many = function(objects, model, type) {
