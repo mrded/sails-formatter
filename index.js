@@ -16,15 +16,13 @@ var one = function(object, model, type) {
 };
 
 var many = function(objects, model, type) {
-  var output = [];
+  objects = objects || [];
 
-  if (objects && objects.length > 0) {
-    objects.map(function(object) {
-      output.push(one(object, model, type));
-    });
-  }
+  var promises = objects.map(function(object) {
+    return one(object, model, type);
+  });
 
-  return Promise.all(output);
+  return Promise.all(promises);
 };
 
 var load = function(fields, output) {
