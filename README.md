@@ -33,12 +33,12 @@ All formatters must be placed under `api/formatters/{Model}/{type}.js` folder.
 | 2 | model    | `String` | Model name of the object to be formatted. |
 | 3 | type     | `String` | Type of the formatter.                    |
 
-### Returns
+#### Returns
 **Type:** `Promise`
 
 Promise with formated object.
 
-### Examples
+#### Examples
 
 ```javascript
 var Formatter = require('sails-formatter');
@@ -59,12 +59,12 @@ User.findOne().then(function(user) {
 | 2 | model    | `String` | Model name of the object to be formatted.  |
 | 3 | type     | `String` | Type of the formatter.                     |
 
-### Returns
+#### Returns
 **Type:** `Promise`
 
 Promise with formated objects.
 
-### Examples
+#### Examples
 
 ```javascript
 var Formatter = require('sails-formatter');
@@ -88,12 +88,12 @@ User.find().then(function(users) {
 |   | field.type  | `String`                    | Type of the formatter.                                     |
 | 2 | output      | `Object`                    | Object there all fields will be loaded.                    |
 
-### Returns
+#### Returns
 **Type:** `Promise`
 
 Promise of `output` object with formatted fields.
 
-### Examples
+#### Examples
 
 ```javascript
 var Formatter = require('sails-formatter');
