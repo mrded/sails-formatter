@@ -1,6 +1,13 @@
 require('rootpath')();
 
 var one = function(object, model, type) {
+  if (object && typeof object !== 'object') {
+    // If only ID is provided - load a full object.
+    return sails.models[model].findOne(object).then(function(object) {
+      return one(object, model, type);
+    });
+  }
+
   var formatterPath = 'api/formatters/%model/%type'
     .replace('%model', model)
     .replace('%type', type);
