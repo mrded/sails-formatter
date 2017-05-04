@@ -24,19 +24,98 @@ I think it make sense to move it out of controller, and organise somehow.
 All formatters must be placed under `api/formatters/{Model}/` folder.
 
 ## Usage
+`Formatter.one(object, model, type);`
+
+|   | Argument | Type     | Details                                   |
+|---|----------|----------|-------------------------------------------|
+| 1 | object   | `Object` | Object to be formatted.                   |
+| 2 | model    | `String` | Model name of the object to be formatted. |
+| 3 | type     | `String` | Type of the formatter.                    |
+
+### Returns
+**Type:** `Promise`
+
+Promise with formated object.
+
+### Examples
+
 ```javascript
 var Formatter = require('sails-formatter');
 
 User.findOne().then(function(user) {
   Formatter.one(user, 'user', 'full').then(console.log);
 });
+```
+
+---
+
+`Formatter.many(objects, model, type);`
+
+|   | Argument | Type     | Details                                    |
+|---|----------|----------|--------------------------------------------|
+| 1 | objects  | `Array`  | Array of objects which you want to format. |
+| 2 | model    | `String` | Model name of the object to be formatted.  |
+| 3 | type     | `String` | Type of the formatter.                     |
+
+### Returns
+**Type:** `Promise`
+
+Promise with formated objects.
+
+### Examples
+
+```javascript
+var Formatter = require('sails-formatter');
 
 User.find().then(function(users) {
   Formatter.many(users, 'user', 'teaser').then(console.log);
 });
 ```
 
-## Example
+---
+
+`Formatter.load(fields, output);`
+
+|   | Argument    | Type                        | Details                                                    |
+|---|-------------|-----------------------------|------------------------------------------------------------|
+| 1 | fields      | `Array`                     | Array of fields to load.                                   |
+|   | field.field | `String`                    | Field name in the output there formatter will be returned. |
+|   | field.model | `String`                    | Model name of the object to be formatted.                  |
+|   | field.data  | `Object` or `Array` or `Id` | Object(s) to be formatted.                                 |
+|   | field.type  | `String`                    | Type of the formatter.                                     |
+| 2 | output      | `Object`                    | Object there all fields will be loaded.                    |
+
+### Returns
+**Type:** `Promise`
+
+Promise of `output` object with formatted fields.
+
+### Examples
+
+```javascript
+var Formatter = require('sails-formatter');
+
+Topic.findOne().then(function(object) {
+  var output = {
+    id: object.id,
+    name: object.name
+  };
+  
+  var requiredFields = [
+    // Load formatters for following fields:
+    { field: 'meta', model: 'meta', data: object.meta, type: 'ref' },
+    { field: 'user', model: 'user', data: object.user, type: 'ref' },
+    { field: 'forum', model: 'forum', data: object.forum, type: 'ref' },
+
+    // object.comments is Array, it's fine.
+    { field: 'comments', model: 'commen', data: object.comments, type: 'ref' },
+  ];
+
+  FormatterService.load(requiredFields, output).then(console.log);
+});
+```
+
+## More examples
 Let's create two formatters for `User` model.
 
 All formatters must input an object to be formatter and return a [promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise).
@@ -63,31 +142,6 @@ module.exports = function(object) {
     
     return output; 
   });
-};
-```
-
-Or, if you have referenced objects, you can load them as following:
-```javascript
-// api/formatters/topic/full.js
-var Formatter = require('sails-formatter');
-
-module.exports = function(object) {
-  var output = {
-    id: object.id,
-    name: object.name
-  };
-  
-  var requiredFields = [
-    // Load formatters for following fields:
-    { field: 'meta', model: 'meta', data: object.meta, type: 'ref' },
-    { field: 'user', model: 'user', data: object.user, type: 'ref' },
-    { field: 'forum', model: 'forum', data: object.forum, type: 'ref' },
-
-    // object.comments is Array, it's fine.
-    { field: 'comments', model: 'commen', data: object.comments, type: 'ref' },
-  ];
-
-  return FormatterService.load(requiredFields, output);
 };
 ```
 
