@@ -111,7 +111,7 @@ Topic.findOne().then(function(object) {
     { field: 'forum', model: 'forum', data: object.forum, type: 'ref' },
 
     // object.comments is Array, it's fine.
-    { field: 'comments', model: 'commen', data: object.comments, type: 'ref' },
+    { field: 'comments', model: 'comment', data: object.comments, type: 'ref' },
   ];
 
   FormatterService.load(requiredFields, output).then(console.log);
