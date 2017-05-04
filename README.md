@@ -21,7 +21,7 @@ I think it make sense to move it out of controller, and organise somehow.
 `npm install sails-formatter --save`
 
 ## Files structure
-All formatters must be placed under `api/formatters/{Model}/` folder.
+All formatters must be placed under `api/formatters/{Model}/{type}.js` folder.
 
 ## Usage
 ### .one()
