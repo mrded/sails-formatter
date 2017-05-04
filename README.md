@@ -24,6 +24,7 @@ I think it make sense to move it out of controller, and organise somehow.
 All formatters must be placed under `api/formatters/{Model}/` folder.
 
 ## Usage
+### .one()
 `Formatter.one(object, model, type);`
 
 |   | Argument | Type     | Details                                   |
@@ -49,6 +50,7 @@ User.findOne().then(function(user) {
 
 ---
 
+### .many()
 `Formatter.many(objects, model, type);`
 
 |   | Argument | Type     | Details                                    |
@@ -74,6 +76,7 @@ User.find().then(function(users) {
 
 ---
 
+### .load()
 `Formatter.load(fields, output);`
 
 |   | Argument    | Type                        | Details                                                    |
