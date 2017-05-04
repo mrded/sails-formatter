@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 0.1.0
 ### Added
 - Possibility to load multiple fields at once.
+- Possibility to pass ID of an object, rather than full object.
 
 ## 0.0.1 - 2017-03-22
 ### Added
