@@ -66,6 +66,31 @@ module.exports = function(object) {
 };
 ```
 
+Or, if you have referenced objects, you can load them as following:
+```javascript
+// api/formatters/topic/full.js
+var Formatter = require('sails-formatter');
+
+module.exports = function(object) {
+  var output = {
+    id: object.id,
+    name: object.name
+  };
+  
+  var requiredFields = [
+    // Load formatters for following fields:
+    { field: 'meta', model: 'meta', data: object.meta, type: 'ref' },
+    { field: 'user', model: 'user', data: object.user, type: 'ref' },
+    { field: 'forum', model: 'forum', data: object.forum, type: 'ref' },
+
+    // object.comments is Array, it's fine.
+    { field: 'comments', model: 'commen', data: object.comments, type: 'ref' },
+  ];
+
+  return FormatterService.load(requiredFields, output);
+};
+```
+
 Now, we can use them in the `UserController`:
 
 ```javascript
