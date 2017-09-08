@@ -1,6 +1,6 @@
 {
   "name": "sails-formatter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Helps to specify how objects are displayed.",
   "main": "index.js",
   "repository": {
