@@ -1,6 +1,6 @@
 require('rootpath')();
 
-var one = function(object, model, type) {
+var one = function(object, model, type, data) {
   if (object && typeof object !== 'object') {
     // If only ID is provided - load a full object.
     return sails.models[model].findOne(object).then(function(object) {
@@ -12,14 +12,14 @@ var one = function(object, model, type) {
     .replace('%model', model)
     .replace('%type', type);
 
-  return require(formatterPath)(object);
+  return require(formatterPath)(object, data || {});
 };
 
-var many = function(objects, model, type) {
+var many = function(objects, model, type, data) {
   objects = objects || [];
 
   var promises = objects.map(function(object) {
-    return one(object, model, type);
+    return one(object, model, type, data);
   });
 
   return Promise.all(promises);
