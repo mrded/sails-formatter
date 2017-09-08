@@ -27,11 +27,12 @@ All formatters must be placed under `api/formatters/{Model}/{type}.js` folder.
 ### .one()
 `Formatter.one(object, model, type);`
 
-|   | Argument | Type     | Details                                   |
-|---|----------|----------|-------------------------------------------|
-| 1 | object   | `Object` | Object to be formatted.                   |
-| 2 | model    | `String` | Model name of the object to be formatted. |
-| 3 | type     | `String` | Type of the formatter.                    |
+|   | Argument | Type     | Details                                                     |
+|---|----------|----------|-------------------------------------------------------------|
+| 1 | object   | `Object` | Object to be formatted.                                     |
+| 2 | model    | `String` | Model name of the object to be formatted.                   |
+| 3 | type     | `String` | Type of the formatter.                                      |
+| 4 | data     | `Object` | Optional data a formater may require. Such as current user. |
 
 #### Returns
 **Type:** `Promise`
@@ -53,11 +54,12 @@ User.findOne().then(function(user) {
 ### .many()
 `Formatter.many(objects, model, type);`
 
-|   | Argument | Type     | Details                                    |
-|---|----------|----------|--------------------------------------------|
-| 1 | objects  | `Array`  | Array of objects which you want to format. |
-| 2 | model    | `String` | Model name of the object to be formatted.  |
-| 3 | type     | `String` | Type of the formatter.                     |
+|   | Argument | Type     | Details                                                     |
+|---|----------|----------|-------------------------------------------------------------|
+| 1 | objects  | `Array`  | Array of objects which you want to format.                  |
+| 2 | model    | `String` | Model name of the object to be formatted.                   |
+| 3 | type     | `String` | Type of the formatter.                                      |
+| 4 | data     | `Object` | Optional data a formater may require. Such as current user. |
 
 #### Returns
 **Type:** `Promise`
@@ -128,7 +130,7 @@ All formatters must input an object to be formatter and return a [promise](https
 module.exports = function(object) {
   return Promise.resolve({
     id: object.id,
-    name: object.name
+    name: object.name,
   });
 };
 ```
