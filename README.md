@@ -32,12 +32,12 @@ All formatters must be placed under `api/formatters/{Model}/{type}.js` folder.
 | 1 | object   | `Object` | Object to be formatted.                                     |
 | 2 | model    | `String` | Model name of the object to be formatted.                   |
 | 3 | type     | `String` | Type of the formatter.                                      |
-| 4 | data     | `Object` | Optional data a formater may require. Such as current user. |
+| 4 | data     | `Object` | Optional data a formatter may require. Such as current user. |
 
 #### Returns
 **Type:** `Promise`
 
-Promise with formated object.
+Promise with formatted object.
 
 #### Examples
 
@@ -59,12 +59,12 @@ User.findOne().then(function(user) {
 | 1 | objects  | `Array`  | Array of objects which you want to format.                  |
 | 2 | model    | `String` | Model name of the object to be formatted.                   |
 | 3 | type     | `String` | Type of the formatter.                                      |
-| 4 | data     | `Object` | Optional data a formater may require. Such as current user. |
+| 4 | data     | `Object` | Optional data a formatter may require. Such as current user. |
 
 #### Returns
 **Type:** `Promise`
 
-Promise with formated objects.
+Promise with formatted objects.
 
 #### Examples
 
