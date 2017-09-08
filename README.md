@@ -173,6 +173,41 @@ module.exports = {
 };
 ```
 
+In case one formatter need some extra data to be build:
+
+```javascript
+// api/controllers/TopicController.js
+module.exports = {
+  findOne: function (req, res) {
+    var promise = Topic.findOne(req.param('id')).then(function(topic) {
+      return Formatter.one(topic, 'topic', 'full', {
+        currentUser: req.session && req.session.user
+      });
+    });
+    
+    promise.then(res.ok).catch(res.badRequest);
+  }
+};
+
+// api/formatters/topic/full.js
+var Formatter = require('sails-formatter');
+
+module.exports = function(object, data) {
+  var output = {
+    id: object.id,
+    name: object.name,
+    body: object.body,
+  };
+  
+  if (data.currentUser) {
+    // That field need to know data.currentUser
+    output.viewed_at = new Date().getTime();
+  }
+
+  return Promise.resolve(output);
+};
+```
+
 ## Ideas
 
 [@sgress454](https://github.com/sgress454) [commented](https://github.com/balderdashy/sails/issues/4049#issuecomment-288526987):
