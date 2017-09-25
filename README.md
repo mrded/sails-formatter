@@ -78,48 +78,6 @@ User.find().then(function(users) {
 
 ---
 
-### .load()
-`Formatter.load(fields, output);`
-
-|   | Argument    | Type                        | Details                                                    |
-|---|-------------|-----------------------------|------------------------------------------------------------|
-| 1 | fields      | `Array`                     | Array of fields to load.                                   |
-|   | field.field | `String`                    | Field name in the output there formatter will be returned. |
-|   | field.model | `String`                    | Model name of the object to be formatted.                  |
-|   | field.data  | `Object` or `Array` or `Id` | Object(s) to be formatted.                                 |
-|   | field.type  | `String`                    | Type of the formatter.                                     |
-| 2 | output      | `Object`                    | Object there all fields will be loaded.                    |
-
-#### Returns
-**Type:** `Promise`
-
-Promise of `output` object with formatted fields.
-
-#### Examples
-
-```javascript
-var Formatter = require('sails-formatter');
-
-Topic.findOne().then(function(object) {
-  var output = {
-    id: object.id,
-    name: object.name
-  };
-  
-  var requiredFields = [
-    // Load formatters for following fields:
-    { field: 'meta', model: 'meta', data: object.meta, type: 'ref' },
-    { field: 'user', model: 'user', data: object.user, type: 'ref' },
-    { field: 'forum', model: 'forum', data: object.forum, type: 'ref' },
-
-    // object.comments is Array, it's fine.
-    { field: 'comments', model: 'comment', data: object.comments, type: 'ref' },
-  ];
-
-  FormatterService.load(requiredFields, output).then(console.log);
-});
-```
-
 ## More examples
 Let's create two formatters for `User` model.
 
