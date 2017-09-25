@@ -25,20 +25,5 @@ var many = function(objects, model, type, data) {
   return Promise.all(promises);
 };
 
-var load = function(fields, output) {
-  var outputPromises = fields.map(function(field) {
-    var formatter = Array.isArray(field.data) ? many : one;
-    
-    return formatter(field.data, field.model, field.type).then(function(refObjects) {
-      output[field.field] = refObjects;
-    });
-  });
-
-  return Promise.all(outputPromises).then(function() {
-    return output;
-  });
-};
-
 module.exports.one = one;
 module.exports.many = many;
-module.exports.load = load;
